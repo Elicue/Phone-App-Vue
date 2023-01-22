@@ -10,7 +10,7 @@ export default createStore({
         number: '0642632909',
       },
       {
-        name: 'arthur',
+        name: 'uwu',
         number: '6666666666',
       },
     ],
@@ -22,7 +22,8 @@ export default createStore({
   mutations: {
     call(state, payload) {
       state.historicall.push(payload)
-    },
+      console.log(state.historicall)
+    }
   },
 
   actions: {

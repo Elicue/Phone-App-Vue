@@ -8,14 +8,14 @@
   <div class="contact w-full mx-auto relative mt-32">
     <table class="contactTable w-10/12 mx-auto">
       <div class="w-11/12 grid grid-cols-3 mx-auto">
-        <tr CLASS=" border-b-[1px] border-black w-10/12 flex flex-row justify-between mb-6" v-for="(contact, index) in contacts" :key="index">
+        <tr class=" border-b-[1px] border-black w-10/12 flex flex-row justify-between mb-6" v-for="(contact, index) in contacts" :key="index">
           <div class="flex flex-row">
             <p class="capitalize text-xl">{{contact.name}}</p>
             <p class="ml-4 text-xl">{{contact.number}}</p>
           </div>
           <div class="flex flex-row justify-between w-1/5 items-center">
             <button @click="deleteContact(index)"><ion-icon class="w-6 h-6 hover:animate-bounce" name="close-circle-outline"></ion-icon></button>
-            <button @click="doCall()"><ion-icon class="w-5 h-5 hover:animate-bounce" name="call"></ion-icon></button>
+            <button @click="doCall(contact)"><ion-icon class="w-5 h-5 hover:animate-bounce" name="call"></ion-icon></button>
           </div>
         </tr>
       </div>
@@ -29,10 +29,10 @@ export default {
   name: "ContactView",
 
   computed: {
-     contacts() {
-        return this.$store.state.registered
-      }
-    },
+    contacts() {
+      return this.$store.state.registered
+    }
+  },
 
   data(){
     return {
@@ -49,17 +49,13 @@ export default {
       this.contacts.splice(index, 1)
     },
 
-    //call the number when the docall button is pressed
-    doCall() {
-      if (this.call.number.length < 10){
-        this.call.number = ""
-        return
-      }
-      this.call.date = new Date().toLocaleString()
-      this.$store.commit('addHistoricall', this.call)
-      this.call.number = ''
+    doCall(contact){
+      this.$store.commit('call', {
+        number: contact.number,
+        name: contact.name,
+        date: new Date().toLocaleString()
+      })
     }
-    
   },
 }
 </script>

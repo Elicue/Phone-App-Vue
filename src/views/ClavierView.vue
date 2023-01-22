@@ -53,10 +53,8 @@ export default {
   },
 
   methods: {
-    AddNum(num) {
-      if (this.call.number.length < 10){
-        this.call.number += num
-      }
+    AddNum(num){
+      this.call.number += num
     },
 
     doCall(){
